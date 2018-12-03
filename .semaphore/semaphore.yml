@@ -9,12 +9,18 @@ blocks:
   - name: Make sure that Docker images exist
     task:
       jobs:
-      - name: MongoDB Docker image
+      - name: MongoDB + Go Docker images
         commands:
           - checkout
-      - name: Go Docker image
-        commands:
-          - checkout
+          - cp go.Dockerfile Dockerfile
+          - docker build -t s2_go:v1 .
+          - mkdir s2_docker
+          - docker save s2_go:v1 -o s2_docker/go.tar
+          - cp mongoDB.Dockerfile Dockerfile
+          - docker build -t s2_mongoDB:v1 .
+          - docker save s2_mongoDB:v1 -o go/mongoDB.tar
+          - ls -l s2_docker
+          - cache store $SEMAPHORE_PROJECT_ID-$SEMAPHORE_GIT_SHA s2_docker
 
   - name: Use Docker images
     task:
@@ -22,5 +28,6 @@ blocks:
       - name: Restore from cache and connect
         commands:
           - checkout
-          - echo "make smoke"
+          - cache restore $SEMAPHORE_PROJECT_ID-$SEMAPHORE_GIT_SHA
+          - ls -l s2_docker
 
