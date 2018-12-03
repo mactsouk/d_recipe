@@ -6,21 +6,20 @@ agent:
     os_image: ubuntu1804
 
 blocks:
-  - name: "Build"
+  - name: Make sure that Docker images exist
     task:
       jobs:
-      - name: Docker build
+      - name: MongoDB Docker image
         commands:
           - checkout
-          - ls -1
-          - echo $APP_ENV
-          - echo "Docker build..."
-          - echo "done"
+      - name: Go Docker image
+        commands:
+          - checkout
 
-  - name: "Smoke tests"
+  - name: Use Docker images
     task:
       jobs:
-      - name: Smoke
+      - name: Restore from cache and connect
         commands:
           - checkout
           - echo "make smoke"
