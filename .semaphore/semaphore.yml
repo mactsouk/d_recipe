@@ -16,7 +16,7 @@ blocks:
           - docker build -t s2_go:v1 .
           - mkdir s2_docker
           - docker save s2_go:v1 -o s2_docker/go.tar
-          - cp mongodb.Dockerfile Dockerfile
+          - cp mongoDB.Dockerfile Dockerfile
           - docker build -t s2_mongodb:v1 .
           - docker save s2_mongodb:v1 -o go/mongodb.tar
           - ls -l s2_docker
