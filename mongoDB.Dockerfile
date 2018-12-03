@@ -1,6 +1,7 @@
 FROM ubuntu
 
 RUN apt-get update
+RUN apt-get install -y gnupg
 
 # Add the package verification key
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
