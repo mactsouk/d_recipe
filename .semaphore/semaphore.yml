@@ -38,5 +38,6 @@ blocks:
           - ls -al
           - docker exec -i -t my_mongodb "echo $PATH"
           - docker exec -i -t my_mongodb "which mongo"
+          - docker exec -i -t my_mongodb "mongo --version"
           - docker exec -i -t my_mongodb "mongo mongo-script.js"
 
