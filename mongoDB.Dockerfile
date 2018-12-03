@@ -4,7 +4,7 @@ RUN apt-get update
 RUN apt-get install -y gnupg
 
 # Add the package verification key
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+RUN sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
 
 RUN echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | tee /etc/apt/sources.list.d/mongodb.list
 RUN apt-get update
