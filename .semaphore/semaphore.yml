@@ -30,4 +30,8 @@ blocks:
           - checkout
           - cache restore $SEMAPHORE_PROJECT_ID-$SEMAPHORE_GIT_SHA
           - ls -l s2_docker
+          - docker load s2_docker/go.tar
+          - docker load s2_docker/mongodb.tar
+          - docker images
+          - docker s2_go:v1
 
