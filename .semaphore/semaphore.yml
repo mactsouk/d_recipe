@@ -35,5 +35,6 @@ blocks:
           - docker images
           - docker run s2_go:v1
           - docker run -d --name my_mongodb s2_mongodb:v1
+          - ls -al
           - docker exec -i -t my_mongodb "mongo mongo-script.js"
 
