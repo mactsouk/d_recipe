@@ -20,7 +20,7 @@ blocks:
           - docker build -t s2_mongodb:v1 .
           - docker save s2_mongodb:v1 -o s2_docker/mongodb.tar
           - ls -l s2_docker
-          - cache store $SEMAPHORE_PROJECT_ID-$SEMAPHORE_GIT_SHA s2_docker
+          - cache store $SEMAPHORE_PROJECT_NAME-$SEMAPHORE_GIT_SHA s2_docker
 
   - name: Use Docker images
     task:
@@ -28,7 +28,7 @@ blocks:
       - name: Restore from cache and connect
         commands:
           - checkout
-          - cache restore $SEMAPHORE_PROJECT_ID-$SEMAPHORE_GIT_SHA
+          - cache restore $SEMAPHORE_PROJECT_NAME-$SEMAPHORE_GIT_SHA
           - ls -l s2_docker
           - docker load -i s2_docker/go.tar
           - docker load -i s2_docker/mongodb.tar
