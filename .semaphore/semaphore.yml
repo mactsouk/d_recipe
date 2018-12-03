@@ -30,9 +30,10 @@ blocks:
           - checkout
           - cache restore $SEMAPHORE_PROJECT_ID-$SEMAPHORE_GIT_SHA
           - ls -l s2_docker
-          - docker load s2_docker/go.tar
-          - docker load s2_docker/mongodb.tar
+          - docker load -i s2_docker/go.tar
+          - docker load -i s2_docker/mongodb.tar
           - docker images
           - docker run s2_go:v1
           - docker run -d s2_mongodb:v1 --name my_mongodb
+          - docker exec -i -t my_mongodb mongo
 
