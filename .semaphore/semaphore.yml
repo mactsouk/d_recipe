@@ -33,5 +33,6 @@ blocks:
           - docker load s2_docker/go.tar
           - docker load s2_docker/mongodb.tar
           - docker images
-          - docker s2_go:v1
+          - docker run s2_go:v1
+          - docker run -d s2_mongodb:v1 --name my_mongodb
 
