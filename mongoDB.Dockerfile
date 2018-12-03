@@ -1,18 +1,14 @@
-FROM ubuntu
+FROM ubuntu:16.04
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
+RUN echo "deb [ arch=amd64 ] http://repo.mongodb.org/apt/ubuntu/ xenial/mongodb-org/3.4 multiverse" |  tee /etc/apt/sources.list.d/mongodb-3.4.list
 
-RUN apt-get update
-RUN apt-get install -y gnupg
-
-# Add the package verification key
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
-
-RUN echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | tee /etc/apt/sources.list.d/mongodb.list
-RUN apt-get update
-RUN apt-get install -y mongodb-10gen
-
-# Create the default data directory
+RUN apt-get update && apt-get install -y mongodb-org
 RUN mkdir -p /data/db
+RUN chown -R mongodb:mongodb /data/db
+# ADD mongodb.conf /etc/mongodb.conf
+# ADD mongodb.pem /etc/ssl/certs/mongodb.pem
+
+VOLUME ["/data/db"]
 EXPOSE 27017
-CMD ["--port 27017", "--smallfiles"]
-ENTRYPOINT usr/bin/mongod
+ENTRYPOINT ["/usr/bin/mongod", "--config", "/etc/mongodb.conf"]
 
