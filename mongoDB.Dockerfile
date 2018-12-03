@@ -10,5 +10,5 @@ ADD mongodb.conf /etc/mongodb.conf
 
 VOLUME ["/data/db"]
 EXPOSE 27017
-ENTRYPOINT ["/usr/bin/mongod", "--config", "/etc/mongodb.conf"]
+ENTRYPOINT ["/usr/bin/mongod", "--fork", "--config", "/etc/mongodb.conf"]
 
