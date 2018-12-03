@@ -35,5 +35,5 @@ blocks:
           - docker images
           - docker run s2_go:v1
           - docker run -d s2_mongodb:v1 --name my_mongodb
-          - docker exec -i -t my_mongodb mongo
+          - docker exec -i -t s2_mongodb:v1 mongo
 
