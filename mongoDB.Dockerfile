@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y mongodb-org
 RUN mkdir -p /data/db
 RUN chown -R mongodb:mongodb /data/db
 ADD mongodb.conf /etc/mongodb.conf
+ADD mongo-script.js /tmp/script.js
 # ADD mongodb.pem /etc/ssl/certs/mongodb.pem
 
 VOLUME ["/data/db"]
