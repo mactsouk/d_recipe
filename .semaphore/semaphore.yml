@@ -12,15 +12,9 @@ blocks:
       - name: MongoDB + Go Docker images
         commands:
           - checkout
-          - cp go.Dockerfile Dockerfile
-          - docker build -t s2_go:v1 .
-          - mkdir s2_docker
-          - docker save s2_go:v1 -o s2_docker/go.tar
-          - cp mongoDB.Dockerfile Dockerfile
-          - docker build -t s2_mongodb:v1 .
-          - docker save s2_mongodb:v1 -o s2_docker/mongodb.tar
-          - ls -l s2_docker
-          - cache store $SEMAPHORE_PROJECT_NAME-$SEMAPHORE_GIT_SHA s2_docker
+          - chmod 755 ./createDockers.sh
+          - cache restore $SEMAPHORE_PROJECT_NAME-$SEMAPHORE_GIT_SHA
+          - [ -d "s2_docker" ] && echo "Found!" || ./createDockers.sh
 
   - name: Use Docker images
     task:
