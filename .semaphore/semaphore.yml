@@ -14,7 +14,7 @@ blocks:
           - checkout
           - chmod 755 ./createDockers.sh
           - cache restore $SEMAPHORE_PROJECT_NAME-$SEMAPHORE_GIT_SHA
-          - [ -d "s2_docker" ] && echo "Found" || ./createDockers.sh
+          - "[ -d 's2_docker' ] && echo 'Found' || ./createDockers.sh"
 
   - name: Use Docker images
     task:
