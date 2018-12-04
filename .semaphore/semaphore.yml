@@ -12,9 +12,8 @@ blocks:
       - name: MongoDB + Go Docker images
         commands:
           - checkout
-          - chmod 755 ./createDockers.sh
           - cache restore $(checksum go.Dockerfile)-$(checksum mongoDB.Dockerfile)
-          - "[ -d 's2_docker' ] && echo 'Found' || ./createDockers.sh"
+          - "[ -d 's2_docker' ] && echo 'Found' || source ./createDockers.sh"
 
   - name: Use Docker images
     task:
