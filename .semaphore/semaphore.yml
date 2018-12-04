@@ -13,7 +13,7 @@ blocks:
         commands:
           - checkout
           - chmod 755 ./createDockers.sh
-          - cache $(checksum go.Dockerfile)-$(checksum mongoDB.Dockerfile)
+          - cache restore $(checksum go.Dockerfile)-$(checksum mongoDB.Dockerfile)
           - "[ -d 's2_docker' ] && echo 'Found' || ./createDockers.sh"
 
   - name: Use Docker images
