@@ -13,7 +13,7 @@ blocks:
         commands:
           - checkout
           - chmod 755 ./createDockers.sh
-          - cache restore $SEMAPHORE_PROJECT_NAME-$SEMAPHORE_GIT_SHA
+          - cache $(checksum go.Dockerfile)-$(checksum mongoDB.Dockerfile)
           - "[ -d 's2_docker' ] && echo 'Found' || ./createDockers.sh"
 
   - name: Use Docker images
@@ -22,7 +22,7 @@ blocks:
       - name: Restore from cache and connect
         commands:
           - checkout
-          - cache restore $SEMAPHORE_PROJECT_NAME-$SEMAPHORE_GIT_SHA
+          - cache restore $(checksum go.Dockerfile)-$(checksum mongoDB.Dockerfile)
           - ls -l s2_docker
           - docker load -i s2_docker/go.tar
           - docker load -i s2_docker/mongodb.tar
